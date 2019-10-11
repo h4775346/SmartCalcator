@@ -35,6 +35,7 @@ dependencies {
     //image text library
 
     implementation 'com.google.android.gms:play-services-vision:18.0.0'
-    implementation  'com.mapzen.android:speakerbox:1.4.1'
+    implementation 'com.mapzen.android:speakerbox:1.4.1'
     implementation 'com.snatik:storage:2.1.0'
+
 }

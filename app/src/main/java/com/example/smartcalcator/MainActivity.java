@@ -2,7 +2,7 @@ package com.example.smartcalcator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,19 +22,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.smartcalcator.ScanItems.Scanner;
+import com.example.smartcalcator.ScanItems.ScannerListener;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
+
 import com.mapzen.speakerbox.Speakerbox;
-import com.snatik.storage.Storage;
+
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     Uri image_uri;
     Speakerbox speakerbox;
-
+    SurfaceView surfaceView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,22 @@ public class MainActivity extends AppCompatActivity {
         mPreviewIv = findViewById(R.id.imageIv);
         image_talk = findViewById(R.id.image_talk);
         image_save = findViewById(R.id.image_save);
+        surfaceView = findViewById(R.id.surface);
+        Scanner scanner = new Scanner(this, surfaceView);
+        scanner.setScanning(true);
+        scanner.scan();
+        scanner.setListener(new ScannerListener() {
+            @Override
+            public void onDetected(String detections) {
+                mResultEt.setText(detections);
+            }
+
+            @Override
+            public void onStateChanged(String state, int i) {
+
+            }
+        });
+
 
         image_talk.setOnClickListener(new View.OnClickListener() {
             @Override

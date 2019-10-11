@@ -16,6 +16,11 @@
             android:orientation="vertical"
             >
 
+           <SurfaceView
+               android:id="@+id/surface"
+               android:layout_width="match_parent"
+               android:layout_height="300dp"/>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,6 +38,9 @@
                     >
 
 
+
+
+
                         <TextView
                             android:id="@+id/mText"
                             android:text="Result"
@@ -41,6 +49,22 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="20sp"
                             />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:src="@drawable/ic_action_menu"
+
+                            android:layout_alignParentEnd="true"
+
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginTop="10dp"
+
+                            />
+
+
                         <EditText
                             android:id="@+id/resultEt"
                             android:layout_width="match_parent"
