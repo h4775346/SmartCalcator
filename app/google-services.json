@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "981085685369",
+    "firebase_url": "https://insta-b4b8f.firebaseio.com",
+    "project_id": "insta-b4b8f",
+    "storage_bucket": "insta-b4b8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981085685369:android:8d126726c2f1dd2cf776a8",
+        "android_client_info": {
+          "package_name": "com.example.smartcalcator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981085685369-f4r5erj3hk95gaog05fecl53ob0c5c87.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartcalcator",
+            "certificate_hash": "4fff73acd414eef778d5e7f5f9f1aa17545a19bd"
+          }
+        },
+        {
+          "client_id": "981085685369-f5kkhtfotkpdvbf8mvn3tnbiqebsrabe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcomMynqgYunvfyWMY1nhV46Z52Wd0ImA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981085685369-f5kkhtfotkpdvbf8mvn3tnbiqebsrabe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
