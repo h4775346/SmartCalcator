@@ -13,13 +13,27 @@
         android:id="@+id/surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:id="@+id/start_scan"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/start_scanning"
+        android:layout_centerInParent="true"
+        android:text="Start Scanning"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@android:color/white"
         />
 
 
 <ScrollView
+    android:id="@+id/mScril"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
+    android:visibility="invisible"
     >
 
     <LinearLayout

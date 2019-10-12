@@ -37,5 +37,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision:18.0.0'
     implementation 'com.mapzen.android:speakerbox:1.4.1'
     implementation 'com.snatik:storage:2.1.0'
+    implementation 'com.android.support:support-compat:29.1.1'
+    implementation 'com.daimajia.easing:library:2.0@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+
+
 
 }

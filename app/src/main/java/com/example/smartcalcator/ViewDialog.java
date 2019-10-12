@@ -24,7 +24,8 @@ public class ViewDialog {
         dialog.setContentView(R.layout.result_dialog);
 
        Button finish =  dialog.findViewById(R.id.btn_finish);
-        TextView txt_result = dialog.findViewById(R.id.txt_result_message);
+       Button btn_getText = dialog.findViewById(R.id.btn_getText);
+        final TextView txt_result = dialog.findViewById(R.id.txt_result_message);
 
         txt_result.setText(result);
 
@@ -40,6 +41,19 @@ public class ViewDialog {
         });
 
 
+        btn_getText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.mResultEt.setText(txt_result.getText().toString());
+                activity.finish();
+
+                dialog.dismiss();
+
+
+
+
+            }
+        });
 
         dialog.show();
     }

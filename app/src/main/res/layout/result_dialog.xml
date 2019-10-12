@@ -58,10 +58,10 @@
             android:layout_marginBottom="15dp"
             android:gravity="center"
             android:paddingHorizontal="16dp"
-            android:text="Please Enter Your Data"
+            android:text="There is no result"
             android:textSize="20dp"
 
-            app:layout_constraintBottom_toTopOf="@+id/btn_finish"
+            app:layout_constraintBottom_toTopOf="@+id/lay_buttons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt"
@@ -70,24 +70,54 @@
             android:textColor="@android:color/black"
 
             />
+        <LinearLayout
+            android:id="@+id/lay_buttons"
+            android:layout_width="match_parent"
 
-        <Button
-            android:id="@+id/btn_finish"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            app:layout_constraintWidth_percent=".4"
-            android:layout_marginVertical="15dp"
-            android:background="@drawable/button"
-
-            android:text="OK"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-
-            android:textSize="17sp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/txt_result_message"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+
+            <Button
+
+                android:id="@+id/btn_getText"
+                android:layout_width="140dp"
+                android:layout_height="30dp"
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/button"
+                android:layout_marginHorizontal="15dp"
+                android:textAllCaps="false"
+
+                android:text="Get the text"
+                android:textColor="@android:color/white"
+
+                android:textSize="17sp"
+                />
+
+            <Button
+                android:id="@+id/btn_finish"
+                android:layout_width="140dp"
+                android:layout_height="30dp"
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/button"
+                android:text="Scan again"
+                android:textColor="@android:color/white"
+
+                android:textAllCaps="false"
+                android:textSize="17sp"
+                android:layout_marginHorizontal="15dp"
+                />
+
+
+
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

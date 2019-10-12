@@ -21,7 +21,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -30,11 +32,13 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smartcalcator.ScanItems.Scanner;
 import com.example.smartcalcator.ScanItems.ScannerListener;
 import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
@@ -47,11 +51,15 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText mResultEt;
+
+    public static EditText mResultEt;
+
     ImageView mPreviewIv;
 
     private static final int CAMERA_REQUEST_CODE = 200;
@@ -63,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     String cameraPermission[];
     String storagePermission[];
-    ImageView image_talk, image_save,imageCamera;
+    ImageView image_talk, image_save,imageCamera,image_microfone,image_gallery,image_share;
 
     Uri image_uri;
     Speakerbox speakerbox;
@@ -87,6 +95,49 @@ public class MainActivity extends AppCompatActivity {
         mPreviewIv = findViewById(R.id.imageIv);
         image_talk = findViewById(R.id.image_talk);
         image_save = findViewById(R.id.image_save);
+        image_gallery= findViewById(R.id.image_gallery);
+        image_share= findViewById(R.id.image_share);
+        image_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(mResultEt.getText())){
+
+                    Toast.makeText(MainActivity.this, "There is no text to share", Toast.LENGTH_SHORT).show();
+
+
+                    return;
+                }
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, mResultEt.getText().toString());
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Send Text To");
+                startActivity(Intent.createChooser(shareIntent, "Share..."));
+
+            }
+        });
+
+        image_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageImportDialog();
+            }
+        });
+        image_microfone = findViewById(R.id.image_microfone);
+        image_microfone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, 10);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         imageCamera = findViewById(R.id.image_camera);
         imageCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +181,13 @@ public class MainActivity extends AppCompatActivity {
         image_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(mResultEt.getText().toString())){
+                    Toast.makeText(MainActivity.this, "There is no text to save", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
                 createFile();
+
 
             }
         });
@@ -181,7 +238,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a file with the requested Mime type
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TITLE, "daaaataaaa.txt");
+        if (mResultEt.getText().toString().contains(" ")){
+            String mystring = mResultEt.getText().toString();
+            String arr[] = mystring.split(" ", 2);
+
+            String firstWord = arr[0];
+            String theRest = arr[1];
+            intent.putExtra(Intent.EXTRA_TITLE,firstWord);
+
+        }else {
+            intent.putExtra(Intent.EXTRA_TITLE,mResultEt.getText().toString());
+        }
+
 
         startActivityForResult(intent, WRITE_REQUEST_CODE);
     }
@@ -194,26 +262,20 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.addImage) {
 
-            showImageImportDialog();
+
 
         }
 
 
         if (id == R.id.settings) {
 
-            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+
 
 
         }
 
 
         if (id == R.id.share) {
-
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, mResultEt.getText().toString());
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Send Text To");
-            startActivity(Intent.createChooser(shareIntent, "Share..."));
 
 
         }
@@ -359,7 +421,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        switch (requestCode) {
+            case 10:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    mResultEt.setText(result.get(0));
+                }
+                break;
+        }
         if (resultCode == RESULT_OK) {
             if (requestCode == IMAGE_PICK_GALLERY) {
 
@@ -389,6 +458,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Uri resultUri = result.getUri();
                 mPreviewIv.setImageURI(resultUri);
+
+                findViewById(R.id.lImage).setVisibility(View.VISIBLE);
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) mPreviewIv.getDrawable();
 
                 Bitmap bitmap = bitmapDrawable.getBitmap();
@@ -438,6 +509,8 @@ public class MainActivity extends AppCompatActivity {
                 case Activity.RESULT_CANCELED:
                     break;
             }
+
+
 
         }
 
