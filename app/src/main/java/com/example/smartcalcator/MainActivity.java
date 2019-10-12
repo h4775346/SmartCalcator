@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     String cameraPermission[];
     String storagePermission[];
-    ImageView image_talk, image_save,imageCamera,image_microfone,image_gallery,image_share;
+    ImageView image_talk, image_save,imageCamera,image_microfone,image_gallery,image_share,image_delete;
 
     Uri image_uri;
     Speakerbox speakerbox;
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         image_save = findViewById(R.id.image_save);
         image_gallery= findViewById(R.id.image_gallery);
         image_share= findViewById(R.id.image_share);
+        image_delete = findViewById(R.id.image_del);
         image_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,6 +190,13 @@ public class MainActivity extends AppCompatActivity {
                 createFile();
 
 
+            }
+        });
+
+        image_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mResultEt.getText().clear();
             }
         });
 
