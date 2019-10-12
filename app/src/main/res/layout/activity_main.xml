@@ -183,7 +183,7 @@
                         android:layout_height="wrap_content"
 
 
-                        android:scaleType="centerCrop"
+                        android:scaleType="center"
                         android:src="@drawable/say_hi"
                         android:maxHeight="250dp"
                         android:background="@drawable/mage_background"
