@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
  android:layout_gravity="center"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
@@ -12,62 +13,87 @@
 
     android:orientation="vertical">
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@android:color/white"
+
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/txt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="15dp"
+
+            android:paddingHorizontal="16dp"
+            android:text="Result"
+            android:textSize="20dp"
+
+            android:textColor="@color/colorPrimary"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            />
+
+
+        <TextView
+            android:id="@+id/txt_result_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center"
-            android:background="@android:color/white"
+            android:paddingHorizontal="16dp"
+            android:text="Please Enter Your Data"
+            android:textSize="20dp"
 
-            android:orientation="vertical">
+            app:layout_constraintBottom_toTopOf="@+id/btn_finish"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt"
+            app:layout_constraintWidth_percent=".75"
 
+            android:textColor="@android:color/black"
 
-            <TextView
-                android:id="@+id/txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="15dp"
+            />
 
-                android:paddingHorizontal="16dp"
-                android:text="Result"
-                android:textSize="20dp"
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            app:layout_constraintWidth_percent=".4"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/button"
 
-                android:textColor="@color/colorPrimary"
-                android:layout_marginHorizontal="10dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+            android:text="OK"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
 
-                />
-
-
-            <TextView
-                android:id="@+id/txt_result_message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="15dp"
-                android:gravity="center"
-                android:paddingHorizontal="16dp"
-                android:text="Please Enter Your Data"
-                android:textSize="20dp"
+            android:textSize="17sp"
+            app:layout_constraintTop_toBottomOf="@+id/txt_result_message"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt"
-                app:layout_constraintWidth_percent=".75"
-
-                android:textColor="@android:color/black"
-
-                />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 
 
 

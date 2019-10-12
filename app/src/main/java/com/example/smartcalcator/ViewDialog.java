@@ -23,7 +23,7 @@ public class ViewDialog {
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.result_dialog);
 
-      //  Button finish =  dialog.findViewById(R.id.btn_finish);
+       Button finish =  dialog.findViewById(R.id.btn_finish);
         TextView txt_result = dialog.findViewById(R.id.txt_result_message);
 
         txt_result.setText(result);
@@ -31,7 +31,7 @@ public class ViewDialog {
 
 
 
-/*
+
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,8 +39,9 @@ public class ViewDialog {
             }
         });
 
+
+
         dialog.show();
-*/
     }
 
 

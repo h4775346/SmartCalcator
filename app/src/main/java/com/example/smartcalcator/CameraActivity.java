@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.smartcalcator.ScanItems.Scanner;
 import com.example.smartcalcator.ScanItems.ScannerListener;
@@ -15,11 +16,13 @@ public class CameraActivity extends AppCompatActivity {
     SurfaceView surfaceView;
     TextView txt_result;
     Scanner scanner;
+    ViewDialog dialog;
     boolean stoped_scanning=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        dialog = new ViewDialog(this);
 
         surfaceView = findViewById(R.id.surface);
         txt_result = findViewById(R.id.txt_recognise);
@@ -34,8 +37,9 @@ public class CameraActivity extends AppCompatActivity {
                 Log.d("detect1 " , detections);
 
                 if (stoped_scanning){
-                    startHandler();
                     stoped_scanning=false;
+                    startHandler();
+
                 }
 
 
@@ -60,8 +64,8 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void run() {
 
+                Toast.makeText(CameraActivity.this, "asd", Toast.LENGTH_SHORT).show();
                 scanner.setScanning(false);
-                ViewDialog dialog = new ViewDialog(CameraActivity.this);
                 dialog.showDialog(txt_result.getText().toString());
 
 
