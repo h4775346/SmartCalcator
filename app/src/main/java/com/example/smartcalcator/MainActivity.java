@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
     String cameraPermission[];
     String storagePermission[];
-    ImageView image_talk, image_save;
+    ImageView image_talk, image_save,imageCamera;
 
     Uri image_uri;
     Speakerbox speakerbox;
-    SurfaceView surfaceView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,22 +87,14 @@ public class MainActivity extends AppCompatActivity {
         mPreviewIv = findViewById(R.id.imageIv);
         image_talk = findViewById(R.id.image_talk);
         image_save = findViewById(R.id.image_save);
-        surfaceView = findViewById(R.id.surface);
-        Scanner scanner = new Scanner(this, surfaceView);
-        scanner.setScanning(true);
-        scanner.scan();
-        scanner.setListener(new ScannerListener() {
+        imageCamera = findViewById(R.id.image_camera);
+        imageCamera.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDetected(String detections) {
-                mResultEt.setText(detections);
-            }
-
-            @Override
-            public void onStateChanged(String state, int i) {
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),CameraActivity.class));
 
             }
         });
-
 
         image_talk.setOnClickListener(new View.OnClickListener() {
             @Override
