@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mResultEt.getText().clear();
+                mPreviewIv.setImageResource(R.drawable.say_hi);
             }
         });
 
